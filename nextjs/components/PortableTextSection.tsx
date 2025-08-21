@@ -1,10 +1,27 @@
 import Image from "next/image";
 import { urlForImage } from "@/sanity/client";
-import { PortableText } from "@portabletext/react";
+import { PortableText, PortableTextComponents } from "@portabletext/react";
+import { RichTextBlock } from "@/types";
 
-const stylings = {
+// Type for image values in portable text
+type ImageValue = {
+  _type: "image";
+  asset: {
+    _ref: string;
+    _type: "reference";
+  };
+  alt?: string;
+  caption?: string;
+};
+
+// Type for mark definitions (like links)
+type MarkValue = {
+  href?: string;
+};
+
+const stylings: PortableTextComponents = {
   types: {
-    image: ({ value }: { value: any }) => (
+    image: ({ value }: { value: ImageValue }) => (
       <figure className="my-6">
         <Image
           src={urlForImage(value).url()}
@@ -18,18 +35,24 @@ const stylings = {
     ),
   },
   block: {
-    h1: ({ children }: any) => <h1>{children}</h1>,
-    h2: ({ children }: any) => <h2>{children}</h2>,
-    h3: ({ children }: any) => <h3>{children}</h3>,
-    normal: ({ children }: any) => <p>{children}</p>,
-    blockquote: ({ children }: any) => <blockquote>{children}</blockquote>,
+    h1: ({ children }) => <h1>{children}</h1>,
+    h2: ({ children }) => <h2>{children}</h2>,
+    h3: ({ children }) => <h3>{children}</h3>,
+    normal: ({ children }) => <p>{children}</p>,
+    blockquote: ({ children }) => <blockquote>{children}</blockquote>,
   },
   marks: {
-    strong: ({ children }: any) => (
+    strong: ({ children }) => (
       <strong className="font-semibold">{children}</strong>
     ),
-    em: ({ children }: any) => <em className="italic">{children}</em>,
-    link: ({ children, value }: any) => (
+    em: ({ children }) => <em className="italic">{children}</em>,
+    link: ({
+      children,
+      value,
+    }: {
+      children: React.ReactNode;
+      value?: MarkValue;
+    }) => (
       <a
         href={value?.href || "#"}
         className="text-blue-600 hover:text-blue-800 underline"
@@ -42,10 +65,14 @@ const stylings = {
   },
 };
 
-export default function PortableTextSection({ block }: { block: any }) {
+export default function PortableTextSection({
+  content,
+}: {
+  content: RichTextBlock;
+}) {
   return (
     <section className="prose text-foreground max-w-3xl mx-auto mt-8">
-      <PortableText value={block.content || []} components={stylings} />
+      <PortableText value={content.content} components={stylings} />
     </section>
   );
 }
