@@ -9,7 +9,7 @@ const ABOUT_QUERY = defineQuery(`*[_type == "about"][0]{
   content,
   image
 }`);
-const options = { next: { revalidate: 30 } };
+const options = { next: { revalidate: 3600 } };
 
 export default async function page() {
   const about = await client.fetch<SanityDocument>(ABOUT_QUERY, {}, options);

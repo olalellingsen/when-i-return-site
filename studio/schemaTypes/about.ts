@@ -11,6 +11,14 @@ export const about = defineType({
       title: 'Title',
     }),
     defineField({
+      name: 'image',
+      type: 'image',
+      title: 'Image',
+      options: {
+        hotspot: true,
+      },
+    }),
+    defineField({
       name: 'content',
       type: 'array',
       title: 'Content',
@@ -26,14 +34,6 @@ export const about = defineType({
           ],
         },
       ],
-    }),
-    defineField({
-      name: 'image',
-      type: 'image',
-      title: 'Image',
-      options: {
-        hotspot: true,
-      },
     }),
   ],
 })
