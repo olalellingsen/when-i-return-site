@@ -44,3 +44,11 @@ export type AboutPage = {
   image?: SanityImageSource;
   content?: PortableTextBlock[];
 };
+
+export type Concert = {
+  date?: string;
+  time?: string;
+  location?: string;
+  ticketsLink?: string;
+  description?: string;
+};

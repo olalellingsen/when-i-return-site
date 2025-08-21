@@ -25,19 +25,15 @@ body {
   color: var(--foreground);
 }
 
-main {
-  @apply max-w-5xl mx-auto py-4 sm:py-8;
-}
-
 h1 {
   @apply text-5xl mb-4 px-2 lg:px-0;
 }
 h2 {
-  @apply text-3xl mb-4 px-2 lg:px-0;
+  @apply text-3xl mb-2 px-2 lg:px-0;
 }
 
 h3 {
-  @apply text-2xl mb-4 px-2 lg:px-0;
+  @apply text-2xl px-2 lg:px-0;
 }
 
 p {
@@ -46,4 +42,8 @@ p {
 
 figcaption {
   @apply text-sm text-gray-600 dark:text-gray-400 mt-2 px-2 lg:px-0;
+}
+
+.button {
+  @apply px-4 py-2 bg-green-900 text-background rounded-2xl hover:bg-green-800;
 }

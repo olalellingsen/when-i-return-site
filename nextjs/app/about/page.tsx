@@ -10,7 +10,7 @@ const ABOUT_QUERY = defineQuery(`*[_type == "about"][0]{
   content,
   image
 }`);
-const options = { next: { revalidate: 3600 } };
+const options = { next: { revalidate: 600 } };
 
 export default async function page() {
   const about = await client.fetch<AboutPage>(ABOUT_QUERY, {}, options);
@@ -26,7 +26,7 @@ export default async function page() {
   };
 
   return (
-    <main>
+    <>
       <h1>{about.title}</h1>
 
       {about.image && (
@@ -40,6 +40,6 @@ export default async function page() {
       )}
 
       <PortableTextComponent content={richTextBlock} />
-    </main>
+    </>
   );
 }

@@ -4,7 +4,6 @@ import SpotifyPlayer from "@/components/SpotifyPlayer";
 import { client, urlForImage } from "@/sanity/client";
 import { HomePage } from "@/types";
 import { defineQuery } from "next-sanity";
-
 import Image from "next/image";
 
 const HOME_QUERY = defineQuery(`*[_type == "home"][0]{
@@ -18,7 +17,7 @@ const HOME_QUERY = defineQuery(`*[_type == "home"][0]{
     size,
   }
 }`);
-const options = { next: { revalidate: 3600 } };
+const options = { next: { revalidate: 600 } };
 
 export default async function Home() {
   const home = await client.fetch<HomePage>(HOME_QUERY, {}, options);
@@ -30,7 +29,7 @@ export default async function Home() {
   }
 
   return (
-    <main>
+    <>
       <h1>{home.title || "Welcome"}</h1>
 
       {home.homeImage && (
@@ -69,6 +68,6 @@ export default async function Home() {
             return null;
         }
       })}
-    </main>
+    </>
   );
 }

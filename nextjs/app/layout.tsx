@@ -27,9 +27,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${radley.variable} ${radleyMono.variable} antialiased`}>
+      <body
+        className={`${radley.variable} ${radleyMono.variable} antialiased flex flex-col min-h-screen`}
+      >
         <Navbar />
-        {children}
+        <main className="flex-grow w-full max-w-5xl mx-auto py-4 sm:py-8">
+          {children}
+        </main>
         <Footer />
       </body>
     </html>
