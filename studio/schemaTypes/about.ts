@@ -33,6 +33,26 @@ export const about = defineType({
             {title: 'Quote', value: 'blockquote'},
           ],
         },
+        {
+          type: 'image',
+          options: {
+            hotspot: true,
+          },
+          fields: [
+            {
+              name: 'caption',
+              type: 'string',
+              title: 'Caption',
+              description: 'Image caption (optional)',
+            },
+            {
+              name: 'alt',
+              type: 'string',
+              title: 'Alt text',
+              description: 'Alternative text for accessibility',
+            },
+          ],
+        },
       ],
     }),
   ],

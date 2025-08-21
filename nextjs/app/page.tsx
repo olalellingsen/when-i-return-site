@@ -1,10 +1,11 @@
 import Gallery from "@/components/Gallery";
+import PortableTextComponent from "@/components/PortableTextSection";
 import SpotifyPlayer from "@/components/SpotifyPlayer";
 import { client, urlForImage } from "@/sanity/client";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
-import { defineQuery, PortableText, PortableTextBlock } from "next-sanity";
+import { defineQuery, PortableTextBlock } from "next-sanity";
+
 import Image from "next/image";
-import { Url } from "url";
 
 const HOME_QUERY = defineQuery(`*[_type == "home"][0]{
   title,
@@ -46,9 +47,7 @@ export default async function Home() {
 
   return (
     <main>
-      <h1 className="text-5xl font-bold mb-8 text-gray-900 dark:text-gray-100">
-        {home.title || "Welcome"}
-      </h1>
+      <h1>{home.title || "Welcome"}</h1>
 
       {home.homeImage && (
         <section>
@@ -57,19 +56,18 @@ export default async function Home() {
             alt={home.homeImage.alt || "Home Image"}
             width={800}
             height={600}
+            className="w-full aspect-square sm:aspect-video object-cover"
           />
-          {home.homeImage.caption && <p>{home.homeImage.caption}</p>}
+          {home.homeImage.caption && (
+            <figcaption>{home.homeImage.caption}</figcaption>
+          )}
         </section>
       )}
 
       {home.pageBuilder?.map((block, index) => {
         switch (block._type) {
           case "richText":
-            return (
-              <section key={index} className="prose p-4">
-                <PortableText value={block.content || []} />
-              </section>
-            );
+            return <PortableTextComponent key={index} block={block} />;
           case "gallery":
             return (
               <section key={index} className="my-10">

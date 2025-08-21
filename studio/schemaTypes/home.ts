@@ -71,7 +71,38 @@ export const home = defineType({
               name: 'content',
               title: 'Content',
               type: 'array',
-              of: [{type: 'block'}],
+              of: [
+                {
+                  type: 'block',
+                  styles: [
+                    {title: 'Normal', value: 'normal'},
+                    {title: 'Heading 1', value: 'h1'},
+                    {title: 'Heading 2', value: 'h2'},
+                    {title: 'Heading 3', value: 'h3'},
+                    {title: 'Quote', value: 'blockquote'},
+                  ],
+                },
+                {
+                  type: 'image',
+                  options: {
+                    hotspot: true,
+                  },
+                  fields: [
+                    {
+                      name: 'caption',
+                      type: 'string',
+                      title: 'Caption',
+                      description: 'Image caption (optional)',
+                    },
+                    {
+                      name: 'alt',
+                      type: 'string',
+                      title: 'Alt text',
+                      description: 'Alternative text for accessibility',
+                    },
+                  ],
+                },
+              ],
             },
           ],
           preview: {
