@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Menu } from "lucide-react";
 import { X } from "lucide-react";
 import Link from "next/link";
@@ -9,19 +9,32 @@ function Navbar() {
   const [menuItems] = useState([
     { label: "Home", path: "/" },
     { label: "About", path: "/about" },
-    // { label: "Discography", path: "/discography" },
     { label: "Concerts", path: "/concerts" },
+    { label: "Contact", path: "/contact" },
+    // { label: "Shop", path: "/shop" },
   ]);
 
   const [isOpen, setIsOpen] = useState(false);
   const openMenu = () => setIsOpen(true);
   const closeMenu = () => setIsOpen(false);
 
+  // Prevent body scroll when menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+    return () => {
+      document.body.classList.remove("overflow-hidden");
+    };
+  }, [isOpen]);
+
   return (
     <>
-      <nav className="h-16 sm:h-20 p-2 sm:px-4 flex justify-between w-full">
-        <div
-          className={`hidden sm:flex justify-end w-full gap-8 m-4 text-lg hover:text-stone-500 
+      <nav className="h-16 sm:h-20 p-2 sm:px-4 flex justify-end w-full">
+        <ul
+          className={`hidden md:flex w-max gap-8 m-4 text-lg hover:text-stone-500 dark:hover:text-stone-400
           } `}
         >
           {menuItems.map((item) => (
@@ -33,8 +46,8 @@ function Navbar() {
               {item.label}
             </Link>
           ))}
-        </div>
-        <div className="sm:hidden w-full flex justify-end" onClick={openMenu}>
+        </ul>
+        <div className="md:hidden w-full flex justify-end" onClick={openMenu}>
           <Menu size={50} strokeWidth={1} />
         </div>
         {isOpen && (
@@ -47,7 +60,7 @@ function Navbar() {
             </div>
 
             {/* menu on mobile */}
-            <ul className="text-4xl grid gap-4 p-4">
+            <ul className="text-5xl grid gap-4 p-4">
               {menuItems.map((item) => (
                 <Link
                   key={item.label}

@@ -2,8 +2,8 @@
 @plugin "@tailwindcss/typography";
 
 :root {
-  --background: #ededed;
-  --foreground: #171717;
+  --background: #e9e6e6;
+  --foreground: #1f1f1f;
 }
 
 @theme inline {
@@ -15,8 +15,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #171717;
-    --foreground: #ededed;
+    --background: #1f1f1f;
+    --foreground: #e9e6e6;
   }
 }
 
@@ -45,5 +45,5 @@ figcaption {
 }
 
 .button {
-  @apply px-4 py-2 bg-green-900 text-background rounded-2xl hover:bg-green-800;
+  @apply px-4 py-2 bg-green-900 rounded-xl hover:bg-green-800 text-background dark:text-foreground;
 }

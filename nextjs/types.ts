@@ -28,8 +28,22 @@ export type SpotifyBlock = {
   size: "compact" | "regular" | "large";
 };
 
+// Video block type
+export type VideoBlock = {
+  _type: "videos";
+  videos: Array<{
+    _type: string;
+    url: string;
+    caption: string;
+  }>;
+};
+
 // Union type for all page builder blocks
-export type PageBuilderBlock = RichTextBlock | GalleryBlock | SpotifyBlock;
+export type PageBuilderBlock =
+  | RichTextBlock
+  | GalleryBlock
+  | SpotifyBlock
+  | VideoBlock;
 
 // Main HomePage type
 export type HomePage = {

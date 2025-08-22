@@ -1,22 +1,42 @@
 import Gallery from "@/components/Gallery";
 import PortableTextComponent from "@/components/PortableTextSection";
 import SpotifyPlayer from "@/components/SpotifyPlayer";
+import VideoBlock from "@/components/VideoBlock";
 import { client, urlForImage } from "@/sanity/client";
 import { HomePage } from "@/types";
 import { defineQuery } from "next-sanity";
 import Image from "next/image";
 
-const HOME_QUERY = defineQuery(`*[_type == "home"][0]{
-  title,
-  homeImage,
-  pageBuilder[] {
-    _type,
-    content,
-    images,
-    url,
-    size,
+const HOME_QUERY = defineQuery(`
+  *[_type == "home"][0]{
+    title,
+    homeImage,
+    pageBuilder[]{
+      _type == "richText" => {
+        _type,
+        content
+      },
+      _type == "gallery" => {
+        _type,
+        images
+      },
+      _type == "spotifyPlayer" => {
+        _type,
+        url,
+        size
+      },
+      _type == "videos" => {
+        _type,
+        title,
+        videos[] {
+          _type,
+          url,
+          caption
+        }
+      }
+    }
   }
-}`);
+`);
 const options = { next: { revalidate: 600 } };
 
 export default async function Home() {
@@ -61,6 +81,12 @@ export default async function Home() {
             return (
               <section key={index} className="my-10">
                 <SpotifyPlayer url={block.url} size={block.size} />
+              </section>
+            );
+          case "videos":
+            return (
+              <section key={index} className="my-10">
+                <VideoBlock videos={block.videos} />
               </section>
             );
 

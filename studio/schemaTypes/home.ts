@@ -118,7 +118,7 @@ export const home = defineType({
             },
           },
         },
-
+        // Spotify Player Block
         {
           type: 'object',
           name: 'spotifyPlayer',
@@ -151,6 +151,54 @@ export const home = defineType({
               }
             },
           },
+        },
+
+        // Videos block
+        {
+          type: 'object',
+          name: 'videos',
+          title: 'Videos',
+          fields: [
+            {
+              name: 'title',
+              title: 'Title',
+              type: 'string',
+            },
+            {
+              name: 'videos',
+              type: 'array',
+              of: [
+                {
+                  name: 'video',
+                  title: 'Video',
+                  type: 'object',
+                  fields: [
+                    {
+                      name: 'caption',
+                      title: 'Caption',
+                      type: 'string',
+                    },
+                    {
+                      name: 'url',
+                      title: 'Video URL',
+                      type: 'url',
+                      validation: (Rule) => Rule.required(),
+                    },
+                  ],
+                },
+              ],
+              preview: {
+                select: {
+                  title: 'title',
+                },
+                prepare({title}) {
+                  return {
+                    title: 'Video' + (title ? `: ${title}` : ''),
+                  }
+                },
+              },
+            },
+          ],
         },
 
         // Gallery Block
