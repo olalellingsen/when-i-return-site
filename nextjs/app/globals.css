@@ -1,5 +1,14 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
 
 :root {
   --background: #e9e6e6;
@@ -26,18 +35,18 @@ body {
 }
 
 h1 {
-  @apply text-5xl mb-4 px-2 lg:px-0;
+  @apply text-4xl sm:text-5xl mb-4 px-2;
 }
 h2 {
-  @apply text-3xl mb-2 px-2 lg:px-0;
+  @apply text-2xl sm:text-3xl mb-2 px-2;
 }
 
 h3 {
-  @apply text-2xl px-2 lg:px-0;
+  @apply text-xl sm:text-2xl mb-2 px-2;
 }
 
 p {
-  @apply px-2 lg:px-0;
+  @apply px-2;
 }
 
 figcaption {

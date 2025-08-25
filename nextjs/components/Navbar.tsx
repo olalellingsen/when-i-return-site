@@ -60,7 +60,7 @@ function Navbar() {
             </div>
 
             {/* menu on mobile */}
-            <ul className="text-5xl grid gap-4 p-4">
+            <ul className="text-4xl grid gap-4 px-2">
               {menuItems.map((item) => (
                 <Link
                   key={item.label}

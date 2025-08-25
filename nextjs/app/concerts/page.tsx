@@ -52,7 +52,7 @@ export default async function page() {
           alt="Concert Page"
           width={500}
           height={300}
-          className="aspect-video object-cover lg:aspect-[3/4] w-full"
+          className="aspect-[3/4] sm:aspect-video object-cover lg:aspect-[3/4] w-full"
         />
       </aside>
     </div>

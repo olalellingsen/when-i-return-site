@@ -262,4 +262,11 @@ export const home = defineType({
       validation: (Rule) => Rule.min(1).error('Page must have at least one content block'),
     }),
   ],
+  preview: {
+    prepare() {
+      return {
+        title: 'Home Page',
+      }
+    },
+  },
 })
