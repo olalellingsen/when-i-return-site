@@ -28,21 +28,22 @@ export default async function page() {
                 )}
                 <h3>{album.title}</h3>
                 <p>
-                  {album.releaseDate
-                    ? new Date(album.releaseDate).toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                      })
-                    : "Date unknown"}
+                  {album.releaseDate &&
+                    new Date(album.releaseDate).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
                 </p>
-                <Link
-                  href={album.spotifyLink || "#"}
-                  target="_blank"
-                  className="underline hover:no-underline"
-                >
-                  Listen here!
-                </Link>
+                {album.spotifyLink && (
+                  <Link
+                    href={album.spotifyLink || "#"}
+                    target="_blank"
+                    className="underline hover:no-underline"
+                  >
+                    Listen here!
+                  </Link>
+                )}
               </li>
             ))}
           </ul>
@@ -66,21 +67,22 @@ export default async function page() {
                 )}
                 <h3>{single.title}</h3>
                 <p>
-                  {single.releaseDate
-                    ? new Date(single.releaseDate).toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                      })
-                    : "Date unknown"}
+                  {single.releaseDate &&
+                    new Date(single.releaseDate).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
                 </p>
-                <Link
-                  href={single.spotifyLink || "#"}
-                  target="_blank"
-                  className="underline hover:no-underline"
-                >
-                  Listen here!
-                </Link>
+                {single.spotifyLink && (
+                  <Link
+                    href={single.spotifyLink || "#"}
+                    target="_blank"
+                    className="underline hover:no-underline"
+                  >
+                    Listen here!
+                  </Link>
+                )}
               </li>
             ))}
           </ul>
