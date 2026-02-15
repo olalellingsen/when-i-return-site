@@ -2,57 +2,37 @@ import React from "react";
 import { client } from "@/sanity/client";
 import { Concert } from "@/types";
 import ConcertList from "@/components/ConcertList";
-import { defineQuery } from "next-sanity";
 import Image from "next/image";
 import concertPageImage from "@/public/concertPage.jpg";
+import { PAST_CONCERTS_QUERY, UPCOMING_CONCERTS_QUERY } from "@/queries";
 
-const UPCOMING_CONCERTS_QUERY =
-  defineQuery(`*[_type == "concerts" && date >= now()] | order(date asc) {
-  date,
-  time,
-  location,
-  ticketsLink,
-  description
-}`);
-
-const PAST_CONCERTS_QUERY =
-  defineQuery(`*[_type == "concerts" && date < now()] | order(date desc) {
-  date,
-  location,
-  description
-}`);
-
-const options = { next: { revalidate: 600 } };
+const today = new Date().toISOString().split("T")[0];
 
 export default async function page() {
   const upcoming_concerts = await client.fetch<Concert[]>(
     UPCOMING_CONCERTS_QUERY,
-    {},
-    options
+    { today },
   );
 
-  const past_concerts = await client.fetch<Concert[]>(
-    PAST_CONCERTS_QUERY,
-    {},
-    options
-  );
+  const past_concerts = await client.fetch<Concert[]>(PAST_CONCERTS_QUERY, {
+    today,
+  });
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+    <div className="grid lg:grid-cols-2 gap-4 pt-12">
       <article>
-        <h1>Concerts</h1>
         <ConcertList
           upcoming_concerts={upcoming_concerts}
           past_concerts={past_concerts}
         />
       </article>
-      <aside className="lg:pt-24">
+      <aside className="lg:px-4">
         <Image
           src={concertPageImage}
           alt="Concert Page"
           width={500}
-          height={300}
-          className="aspect-[3/4] sm:aspect-video object-cover lg:aspect-[3/4] w-full"
+          height={500}
+          className="w-full aspect-square object-cover"
         />
       </aside>
     </div>

@@ -1,19 +1,12 @@
 import React from "react";
 import { client, urlForImage } from "@/sanity/client";
-import { defineQuery } from "next-sanity";
 import Image from "next/image";
 import PortableTextComponent from "@/components/PortableTextSection";
 import { AboutPage } from "@/types";
-
-const ABOUT_QUERY = defineQuery(`*[_type == "about"][0]{
-  title,
-  content,
-  image
-}`);
-const options = { next: { revalidate: 600 } };
+import { ABOUT_QUERY } from "@/queries";
 
 export default async function page() {
-  const about = await client.fetch<AboutPage>(ABOUT_QUERY, {}, options);
+  const about = await client.fetch<AboutPage>(ABOUT_QUERY);
 
   if (!about) {
     return <div>Loading...</div>;
@@ -27,15 +20,13 @@ export default async function page() {
 
   return (
     <>
-      <h1>{about.title}</h1>
-
       {about.image && (
         <Image
           src={urlForImage(about.image).url()}
           alt="About Image"
           width={800}
           height={600}
-          className="w-full aspect-square sm:aspect-video object-cover"
+          className="w-full aspect-square sm:aspect-10/4 object-cover"
         />
       )}
 

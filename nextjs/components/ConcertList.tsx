@@ -18,15 +18,15 @@ export default function ConcertList({
   }
 
   return (
-    <>
+    <div className="space-y-10 p-2">
       {upcoming_concerts.length > 0 && (
-        <section className="mt-10">
+        <section>
           <h2>Upcoming concerts</h2>
           <ul className="space-y-2">
             {upcoming_concerts.map((concert, index) => (
               <li
                 key={index}
-                className="flex justify-between max-w-md py-1 border-b border-gray-300"
+                className="flex justify-between py-1 border-b border-gray-300 "
               >
                 <div>
                   <h3>{concert.location}</h3>
@@ -52,15 +52,12 @@ export default function ConcertList({
         </section>
       )}
       {past_concerts.length > 0 && (
-        <section className="mt-10">
+        <section>
           <h2>Past concerts</h2>
 
           <ul className="space-y-2">
             {past_concerts.map((concert, index) => (
-              <li
-                key={index}
-                className="max-w-md py-1 border-b border-gray-300"
-              >
+              <li key={index} className="py-1 border-b border-gray-300">
                 <h3>{concert.location}</h3>
                 <p>{formatDate(concert.date || "")}</p>
               </li>
@@ -68,6 +65,6 @@ export default function ConcertList({
           </ul>
         </section>
       )}
-    </>
+    </div>
   );
 }

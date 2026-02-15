@@ -66,3 +66,20 @@ export type Concert = {
   ticketsLink?: string;
   description?: string;
 };
+
+export type Album = {
+  title: string;
+  coverArt?: SanityImage;
+  releaseDate?: string;
+  spotifyLink?: string;
+  trackList?: string[];
+  personnel?: string[];
+  description?: string;
+};
+
+export type Single = {
+  title: string;
+  coverArt?: SanityImage;
+  releaseDate?: string;
+  spotifyLink?: string;
+};

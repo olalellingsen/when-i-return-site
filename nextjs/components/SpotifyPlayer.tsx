@@ -8,7 +8,7 @@ interface SpotifyPlayerProps {
 export default function SpotifyPlayer({ url, size }: SpotifyPlayerProps) {
   const embedUrl = url.replace(
     "https://open.spotify.com/",
-    "https://open.spotify.com/embed/"
+    "https://open.spotify.com/embed/",
   );
   return (
     <iframe

@@ -4,14 +4,16 @@ import { useState, useEffect } from "react";
 import { Menu } from "lucide-react";
 import { X } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 function Navbar() {
+  const currentPath = usePathname();
   const [menuItems] = useState([
     { label: "Home", path: "/" },
     { label: "About", path: "/about" },
+    { label: "Music", path: "/music" },
     { label: "Concerts", path: "/concerts" },
     { label: "Contact", path: "/contact" },
-    // { label: "Shop", path: "/shop" },
   ]);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -32,7 +34,7 @@ function Navbar() {
 
   return (
     <>
-      <nav className="h-16 sm:h-20 p-2 sm:px-4 flex justify-end w-full">
+      <nav className="h-16 sm:h-20 p-2 sm:px-4 flex justify-center w-full">
         <ul
           className={`hidden md:flex w-max gap-8 m-4 text-lg hover:text-stone-500 dark:hover:text-stone-400
           } `}
@@ -40,7 +42,7 @@ function Navbar() {
           {menuItems.map((item) => (
             <Link
               href={item.path}
-              className={`hover:text-foreground`}
+              className={`hover:text-foreground ${currentPath === item.path ? "underline underline-offset-4" : ""}`}
               key={item.label}
             >
               {item.label}
@@ -65,7 +67,7 @@ function Navbar() {
                 <Link
                   key={item.label}
                   href={item.path}
-                  className="hover:font-medium"
+                  className={`${currentPath === item.path ? "underline underline-offset-4" : ""}`}
                   onClick={closeMenu}
                 >
                   {item.label}

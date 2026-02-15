@@ -20,6 +20,8 @@ export const metadata: Metadata = {
   title: "When I Return",
 };
 
+export const revalidate = 60; // Revalidate every 60 seconds
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -31,9 +33,7 @@ export default function RootLayout({
         className={`${radley.variable} ${radleyMono.variable} antialiased flex flex-col min-h-screen font-light`}
       >
         <Navbar />
-        <main className="flex-grow w-full max-w-6xl mx-auto py-4">
-          {children}
-        </main>
+        <main className="flex-grow w-full">{children}</main>
         <Footer />
       </body>
     </html>
